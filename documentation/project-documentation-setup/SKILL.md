@@ -98,6 +98,22 @@ Cuando el proyecto es una web descriptiva (no un sistema con backend), el README
 - Si el sitio cambia en el tiempo (noticias, rediseños, nuevas secciones), mantenés un CHANGELOG sencillo con entradas descriptivas (`Agregado`, `Corregido`, `Cambiado`).
 - No inventes entradas históricas que no se hayan hecho. Nada técnico aquí tampoco (nada de "migrado a tokens", "optimizado CSS") — solo cambios visibles o de contenido.
 
+## STRUCTURE.md (solo si la estructura lo amerita)
+
+Un `STRUCTURE.md` es un mapa del repositorio para quien va a mantner o desarrollar el proyecto. Se crea SOLO cuando la estructura tiene suficiente enjundia (varias carpetas con lógica interna, assets, fuentes de contenido) como para merecer su propio documento:
+
+**SI (crea STRUCTURE.md):** directorio organizado por secciones (múltiples carpetas `portal/`), múltiples fuentes de contenido (arrays en JS, carpetas de imágenes por evento/año), recursos (CSS por sección, fuentes/íconos locales), scripts de datos.
+**NO (no crear):** proyectos triviales (2–3 archivos, una landing de una página sin lógica interna); en ese caso la estructura se describe en 2 líneas en el README o directamente no se menciona.
+
+Reglas del STRUCTURE.md:
+
+- **Es tan técnico como haga falta**: aquí sí caben carpetas, rutas de imágenes, comandos de ejecución local y explicación de dónde se edita cada contenido — porque su propósito es mantener/depurar, no presentar el proyecto.
+- **SSOT igual que el README**: cada carpeta y archivo mencionado debe existir realmente (`ls`/`find` primero); no inventar rutas ni archivos.
+- **No repite la ficha del README**: no incluye descripción institucional, misión, entidad detrás, ni secciones visibles del sitio (eso es del README). Solo organização técnica.
+- **Formato sugerido:** árbol corto con comentario por carpeta clave + sección "Dónde se edita cada contenido/formación" (tabla) + sección de assets/recursos con la forma (AVIF/WebP + fallback) si es relevante.
+- Cuando existe STRUCTURE.md, el README descriptivo NO menciona estructura en ninguna nota ni aclara que "no tiene estructura": simplemente no la menciona.
+- El nombre `STRUCTURE.md` se usa tal cual (raíz del repo).
+
 ## Run Procedures by Project Profile
 
 **ESTA sección aplica SOLO al perfil técnico** (proyectos que se ejecutan con backend/build/scripts). En perfil descriptivo NINGUNA de estas secciones aparece en el README.

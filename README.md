@@ -12,14 +12,14 @@ La fuente de verdad es este repositorio: desde aquí se exportan las skills a la
 | `ui-design-audit` | `design/ui-design-audit/` | Auditar interfaces web en busca de patrones genéricos de IA, jerarquía débil, estados faltantes y decisiones de diseño no verificables. Produce un veredicto (0-10), hallazgos con severidad y remediación priorizada. |
 | `repo-readme-changelog` | `documentation/project-documentation-setup/` | Crear y mantener la documentación del repositorio: `README.md`, `CHANGELOG.md`, `.env.example`, setup y comandos de ejecución, verificados contra el código y la base de datos reales (SSOT). Cubre tanto proyectos técnicos como sitios descriptivos. |
 | `image-optimizer` | `image-optimizer/` | Optimizar imágenes de un proyecto web convirtiéndolas en masa a AVIF y WebP (con `avifenc`, `cwebp`, ImageMagick, ffmpeg), normalizando orientación EXIF, verificando calidad con RMSE y actualizando las referencias en HTML/CSS/JS. Ahorro típico del 90-98 %. |
-| `spec-hardener` | `specification/spec-hardener/` | Convertir propuestas, análisis o auditorías generadas por otros agentes de IA en un spec/prompt accionable con decisiones cerradas y tests verificables. Cierra iteración tras iteración un único documento vivo. |
+| `spec-hardener` | `specification/spec-hardener/` | Convertir propuestas, análisis o auditorías generadas por otros agentes de IA en un spec/prompt accionable con decisiones de diseño cerradas y tests verificables. Cierra iteración tras iteración un único documento vivo. |
 
 ## Estructura del repositorio
 
 ```
 SKILLS/
 ├── design/
-│   ├── web-platform-design/SKILL.md     → skill: web-platform-design
+│   ├── platform-ui-design/SKILL.md      → skill: web-platform-design
 │   └── ui-design-audit/SKILL.md         → skill: ui-design-audit
 ├── documentation/
 │   └── project-documentation-setup/SKILL.md  → skill: repo-readme-changelog
@@ -32,7 +32,7 @@ SKILLS/
 └── CHANGELOG.md
 ```
 
-El nombre de la carpeta de la skill es el que declara el frontmatter (`name`), no necesariamente el nombre de la carpeta en el repo.
+El destino en `~/.config/opencode/skills` usa el `name` del frontmatter, no el nombre de la carpeta en el repo (ej.: `design/platform-ui-design/` se instala como `web-platform-design`).
 
 ## Requisitos
 
@@ -51,7 +51,7 @@ El script:
 1. Recorre todos los `SKILL.md` del repositorio.
 2. Extrae el `name:` del frontmatter de cada uno.
 3. Copia la carpeta de cada skill a `~/.config/opencode/skills/<name>/`.
-4. Solo reemplaza las skills que cambiaron; reporta un resumen de `nueva(s)`, `renovada(s)` y `sin cambios`.
+4. Solo reemplaza las skills que cambiaron; reporta el resumen de `nueva(s)`, `renovada(s)` y `sin cambios` al final.
 
 La ruta de origen está fijada en el propio script (`/home/juan/Escritorio/SKILLS`); la de destino usa `$HOME`. No requiere variables de entorno ni argumentos.
 
@@ -61,8 +61,8 @@ La ruta de origen está fijada en el propio script (`/home/juan/Escritorio/SKILL
 2. Ejecuta `bash sync-to-opencode.sh` para exportarla.
 3. Verifica con `ls ~/.config/opencode/skills` que aparezca.
 
-Una skill se carga cuando la descripción de la tarea coincide con su `description`: probar la skill desde opencode después de sincronizar.
+Una skill se carga cuando la descripción de la tarea coincide con su `description`: prueba la skill desde opencode después de sincronizar.
 
-## Verificación del script
+## Verificación
 
-Tras sincronizar, los nombres en `~/.config/opencode/skills` deben coincidir 1:1 con los `name` del frontmatter de cada `SKILL.md` del repo. Si una skill no aparece, revisa que declare `name:` en las primeras líneas del archivo.
+Tras sincronizar, los nombres en `~/.config/opencode/skills` deben coincidir 1:1 con los `name` del frontmatter de cada `SKILL.md` del repo. Si una skill no aparece, comprueba que declare `name:` en las primeras líneas del archivo.
