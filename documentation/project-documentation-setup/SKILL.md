@@ -122,6 +122,7 @@ For EVERY project you document, the README run section must contain, in practice
 ## README Rules
 
 - Explain what the project is and what problem it solves.
+- **Estas reglas técnicas (prerequisites, setup, run, tests) aplican SOLO al perfil técnico.** En perfil descriptivo NO documentes cosas para correr instalar; describe qué es y qué contiene.
 - Document prerequisites, setup, configuration, run, and test commands — all SSOT-verified.
 - Stand the stack from the repo, never a generic template.
 - Include a concise folder overview when it helps navigation.
@@ -169,20 +170,21 @@ python run.py
 ## README Example (descriptive profile — institutional/static site)
 
 ```markdown
-# IESTPAIJÁN — Web institucional
+# IESTPAIJÁN — Portal institucional
 
-Plataforma institucional del [IESTPAIJÁN], donde se publican noticias, galería y
-las convocatorias de admisión de la institución.
+Plataforma institucional del [IESTPAIJÁN], donde se publican noticias, galería,
+convocatorias de admisión y la información oficial de la institución.
+Instituto público de educación superior tecnológica creado en [año] y
+licenciado por el Ministerio de Educación. Matrícula 100 % gratuita.
 
 - **Institución:** Instituto de Educación Superior Tecnológico Público ...
 - **Creado por:** ...
+- **Eslogan:** ...
 - **Secciones:** Inicio, Nosotros, Carreras/Programas, Noticias, Galería, Becas, Admisión
 - **Resolución:** R.M. N° ... (tal como figura en la web)
+- **Dirección:** ...
 
-## Estructura
-
-- `index.html` — portada
-- `carreras/`, `noticias/`, `galeria/` — secciones
+_No se incluyen Stack, Estructura, Run, tokens, ni despliegue: es una ficha descriptiva._
 ```
 
 ## CHANGELOG Rules
