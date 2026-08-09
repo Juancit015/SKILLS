@@ -111,7 +111,9 @@ Reglas del STRUCTURE.md:
 - **SSOT igual que el README**: cada carpeta y archivo mencionado debe existir realmente (`ls`/`find` primero); no inventar rutas ni archivos.
 - **No repite la ficha del README**: no incluye descripción institucional, misión, entidad detrás, ni secciones visibles del sitio (eso es del README). Solo organização técnica.
 - **Formato sugerido:** árbol corto con comentario por carpeta clave + sección "Dónde se edita cada contenido/formación" (tabla) + sección de assets/recursos con la forma (AVIF/WebP + fallback) si es relevante.
-- Cuando existe STRUCTURE.md, el README descriptivo NO menciona estructura en ninguna nota ni aclara que "no tiene estructura": simplemente no la menciona.
+- Cuando existe STRUCTURE.md, el README descriptivo cierra con una línea de navegación técnica al final, tipo:
+  `> **Estructura del repositorio:** consultar [STRUCTURE.md](STRUCTURE.md).`
+  Solo añadirla si el archivo existe; no es info técnica dentro del README, es un acceso: el lector que quiera estructura la encuentra, el que no, la ignora.
 - El nombre `STRUCTURE.md` se usa tal cual (raíz del repo).
 
 ## Run Procedures by Project Profile
