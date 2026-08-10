@@ -105,8 +105,8 @@ Cuando el proyecto es una web descriptiva (no un sistema con backend), el README
 
 Un `STRUCTURE.md` es un mapa del repositorio para quien va a mantner o desarrollar el proyecto. Se crea SOLO cuando la estructura tiene suficiente enjundia (varias carpetas con lógica interna, assets, fuentes de contenido) como para merecer su propio documento:
 
-**SI (crea STRUCTURE.md):** directorio organizado por secciones (múltiples carpetas `portal/`), múltiples fuentes de contenido (arrays en JS, carpetas de imágenes por evento/año), recursos (CSS por sección, fuentes/íconos locales), scripts de datos.
-**NO (no crear):** proyectos triviales (2–3 archivos, una landing de una página sin lógica interna); en ese caso la estructura se describe en 2 líneas en el README o directamente no se menciona.
+**SI (crea STRUCTURE.md):** directorio organizado por secciones (múltiples carpetas `portal/`), múltiples fuentes de contenido (arrays en JS, carpetas de imágenes por evento/año), recursos (CSS por sección, fuentes/íconos locales), scripts de datos. **TAMBIÉN SI: aplicaciones/paquetes con arquitectura en capas (2+ niveles de profundidad): controladores/handlers, services, utils, modelos y tests con mocks — donde el mantenedor necesita ubicar dónde se edita cada comportamiento (ej. un bot con `bot/{handlers,services,utils}` + `tests/mocks` es SUFICIENTE para su propio mapa; la regla no es "solo webs de contenido").**
+- Un README con un bloque "Estructura" NO sustituye al STRUCTURE.md cuando el repo califica: el README resume el propósito de cada directorio; STRUCTURE.md detalla dónde se edita cada cosa (archivo ↔ función).
 
 Reglas del STRUCTURE.md:
 
