@@ -151,7 +151,15 @@ Cuando el proyecto se instala desde Git, la instalación se documenta como UN bl
 5. Instalar dependencias.
 6. Ejecutar.
 
-Cada paso con su variante por OS inline en el mismo bloque (Windows/Linux/macOS). El lector debe poder copiar-pastear la secuencia completa sin adivinar pasos intermedios ni omitir el clonado.
+PROHIBIDO documentar la variante por SO como comentario inline en la misma línea del comando (`python -m venv venv      # Windows: venv\Scripts\activate`) o como alternativa pegada en la misma línea (`python multibot.py    # o: python3 multibot.py`). Estilo obligatorio — cada SO con su comando separado y la info extra en bloques propios (patrón sgrv):
+
+- Cada comando con variante por SO va en su propio bloque/encabezado, precedido por su etiqueta: `# Linux / macOS` → `source venv/bin/activate`; `# Windows (PowerShell)` → `venv\Scripts\Activate.ps1`; `# Windows (CMD)` → `venv\Scripts\activate.bat`.
+- La info extra/explicativa va en párrafos independientes DESPUÉS del comando (qué hace el comando, advertencias ⚠, comandos alternativos de instalación de herramientas por distro en su propio bloque).
+- Si una alternativa solo aplica a un subconjunto (ej. Python 3.13+ → `uv venv --python 3.12 venv`), se separa en su propio bloque con su condición ("Si tu Python es X..."), con su explicación y su forma de instalar la herramienta.
+- El lector debe poder copiar-pastear el bloque de SU SO sin editar nada.
+
+- **Intérprete y venv (imprescindible):** la doc deja claro que TODOS los comandos de ejecución corren CON el venv activado, y que `python`/`python3` deben ser los DEL venv (verificable: `which python` → ruta dentro del venv). Si el proyecto arranca con varios binarios posibles en el sistema (`python` vs `python3` pueden apuntar a intérpretes distintos: el del venv vs el del sistema), la doc elige UN binario canónico tras activar el venv y NO ofrece alternativas inline.
+- **Análisis de librerías del proyecto:** derivar de `requirements.txt`/`pyproject` las librerías principales Y las dependencias transitivas notables que pueden aparecer en errores del usuario — si el nombre pip difiere del nombre de importación (ej. `python-telegram-bot` → `import telegram`), documentar esa equivalencia en la tabla de troubleshooting para que `ModuleNotFoundError: No module named 'telegram'` sea diagnosticable.
 
 Si el proyecto aborta por env vars obligatorias (fail-fast en el entry point), la doc incluye en su tabla de troubleshooting una fila con el mensaje de error EXACTO del programa (ej. `Error: falta la variable de entorno BOT_TOKEN`) → Causa: env var no rellenada → Solución: editar `.env` (paso 3) o exportarla antes del paso de ejecución.
 
@@ -162,7 +170,7 @@ Si el proyecto aborta por env vars obligatorias (fail-fast en el entry point), l
 - Document prerequisites, setup, configuration, run, and test commands — all SSOT-verified.
 - En perfil técnico, el bloque de instalación abre con un item "Requisitos previos" (paso 1 de la secuencia): runtime y versión, Git y herramientas de sistema necesarias, con comando de instalación por OS.
 - Cada dependencia principal del Stack lleva su versión/rango EXACTO tomado de `requirements.txt`/`pyproject.toml` (ej. `Flask 3.0.3`, `python-telegram-bot ≥ 21.0,<22.0`) — prohibido un Stack sin versiones.
-- Cuando existan fallos de instalación conocidos y verificables (PEP 668 / externally-managed-environment, binarios que no existen en el host, herramientas ausentes), el README cierra con una tabla Error/Causa/Solución — cada fila extraída de un error real, no inventado.
+- Cuando existan fallos de instalación conocidos y verificables (PEP 668 / externally-managed-environment, binarios que no existen en el host, herramientas ausentes, intérprete del sistema sin venv → `ModuleNotFoundError: No module named '<paquete>'`), el README cierra con una tabla Error/Causa/Solución — cada fila extraída de un error real, no inventado. La fila de `ModuleNotFoundError` apunta a: venv no activado o intérprete equivocado → `source <venv>/bin/activate` (o `<venv>/bin/python <entry>`).
 - Stand the stack from the repo, never a generic template.
 - Include a concise folder overview when it helps navigation.
 - Describe environment variables in a table or compact list.
