@@ -11,6 +11,10 @@
 
 - `README.md` regenerado: ruta de carpeta del árbol corregida (`design/platform-ui-design/`, real en el repo, no `design/web-platform-design/`).
 
+### Agregado (validado con loop de subagentes sobre MultiBot)
+
+- Skill `repo-readme-changelog` reforzada (v5) en la regla de smoke test: **auditoría de URL de red** obligatoria (clasificar 401/403 = esperado con credenciales falsas vs 404/redirect/URL malformada = anomalía → sospechar del default de una env var, no del token); **causa raíz con segunda prueba** (curl independiente al endpoint + inspección del código de la librería instalada); **fix con formato verificado** (si el default apunta a un gateway/proxy, verificar su formato de ruta real antes de escribir la solución, tras detectar en MultiBot que el gateway enruta `<token>/<método>` sin `/bot`); **clasificación del arranque** en el resumen ("hasta la frontera de red" vs "arranque completo").
+
 ### Agregado
 
 - `README.md` con descripción del repositorio, índice de las 5 skills, estructura de carpetas y procedimiento de sincronización a `~/.config/opencode/skills`.
