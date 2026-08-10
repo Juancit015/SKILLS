@@ -34,9 +34,11 @@ Before writing anything, verify in the actual repository:
 
 **Never write a version number, a port, a username, or a command that you did not verify inside the repo.**
 
+**Regeneración desde cero:** si la documentación fue eliminada o se pide regenerarla, está PROHIBIDO recuperar su versión anterior del historial git (`git show <commit>:README.md`, `git log -p`, restaurar borrados o revisar otra rama), incluso para "verificarla". La única fuente es el estado actual del repo (working tree, código, DB, scripts). Si el resultado coincide con la doc previa, debe surgir de que el SSOT es exacto — nunca de copiarla.
+
 ## Workflow
 
-1. Read the repository structure first (ALL of it: main folder + scripts + DB).
+1. Read the repository structure first (ALL of it: main folder + scripts + DB). **Sin consultar versiones previas de la documentación en el historial (git log/show de docs).**
 2. Identify the stack, entry points, existing tooling, and the database.
 3. Create or improve `README.md` so it matches the ACTUAL project (SSOT above).
 4. Add or update `CHANGELOG.md` with meaningful release-style entries describing the documentation changes too.
@@ -258,6 +260,7 @@ Prefer a Keep a Changelog-style entry when no project convention exists:
 - If the DB shows a user the old README omits → ADD it. If the README lists a user the DB never had → DELETE it from docs (mention in summary; do not delete from the DB).
 - If setup commands are unclear, inspect scripts and entry points before inventing new commands.
 - If secrets, tokens, or private values appear in examples → replace with placeholders.
+- **Si el usuario pide regenerar la documentación después de eliminarla → regeneración DESDE CERO: no usar `git show` ni restauraciones para recuperar la versión borrada; reconstruir solo desde el estado actual. Al reportar, indicar explícitamente si se consultó el historial (debe ser "no").**
 - **Si el repo fue movido a otra cuenta/org o es un clon (remote ≠ repo documentado): la URL de `git clone` del README queda obsoleta. Verificar contra `git remote get-url origin`, usar la URL pública (`https://...` si el remote es SSH), corregirla y registrar el arreglo como bullet `Fixed` en el CHANGELOG.**
 
 ## Quality Bar
