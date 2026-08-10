@@ -153,6 +153,8 @@ Cuando el proyecto se instala desde Git, la instalación se documenta como UN bl
 
 Cada paso con su variante por OS inline en el mismo bloque (Windows/Linux/macOS). El lector debe poder copiar-pastear la secuencia completa sin adivinar pasos intermedios ni omitir el clonado.
 
+Si el proyecto aborta por env vars obligatorias (fail-fast en el entry point), la doc incluye en su tabla de troubleshooting una fila con el mensaje de error EXACTO del programa (ej. `Error: falta la variable de entorno BOT_TOKEN`) → Causa: env var no rellenada → Solución: editar `.env` (paso 3) o exportarla antes del paso de ejecución.
+
 ## README Rules
 
 - Explain what the project is and what problem it solves.
