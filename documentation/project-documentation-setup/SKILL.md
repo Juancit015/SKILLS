@@ -168,6 +168,13 @@ PROHIBIDO documentar la variante por SO como comentario inline en la misma líne
 
 Si el proyecto aborta por env vars obligatorias (fail-fast en el entry point), la doc incluye en su tabla de troubleshooting una fila con el mensaje de error EXACTO del programa (ej. `Error: falta la variable de entorno BOT_TOKEN`) → Causa: env var no rellenada → Solución: editar `.env` (paso 3) o exportarla antes del paso de ejecución.
 
+- **Verificación de arranque (smoke test obligatorio):** tras documentar, EJECUTAR el entry point real (con el runtime del host o el más cercano al documentado) hasta el punto donde falla por credenciales o red. Si el programa adopta (o hereda) un runtime que rompe las librerías (ej. Python 3.14 + python-telegram-bot 21.x → `RuntimeError: There is no current event loop`), la doc:
+  - fija el rango de Python VERIFICADO (ej. "Python 3.11+ probado en 3.11 y 3.14"), nunca "X o superior" sin prueba;
+  - añade fila en troubleshooting con el mensaje del RUNTIME y su causa/arreglo (actualizar la librería o bajar el runtime);
+  - reporta el hallazgo al usuario en el resumen.
+  Si NO se puede ejecutar (sin entorno), declararlo explícitamente al reportar.
+- **Cada SO/distro con su propio bloque:** prohibido condensar varias distros en una sola línea o párrafo (ej. "En Fedora: sudo dnf… En Arch: sudo pacman… En macOS: brew…"). Cada una con su etiqueta y su bloque de código propio; el lector de cada OS copia su bloque sin editar.
+
 ## README Rules
 
 - Explain what the project is and what problem it solves.
