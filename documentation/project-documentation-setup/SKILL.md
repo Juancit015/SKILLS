@@ -59,6 +59,7 @@ Inspect these files and directories BEFORE writing anything:
 - missing setup notes or undocumented environment variables
 - hardcoded paths, ports, or commands that should be documented
 - missing changelog entries for infrastructure or user-visible work
+- `git remote -v` (remote real de origin) — la URL de `git clone` del README debe coincidir con ella; si el remote es SSH (`git@github.com:owner/repo.git`), documenta la URL pública equivalente `https://github.com/owner/repo.git` (clonable sin clave SSH)
 
 ## Profile Check (primero, SIEMPRE)
 
@@ -137,11 +138,27 @@ For EVERY project you document, the README run section must contain, in practice
 4. Env variables table (from `.env.example`/`config.py`, never invented).
 5. Available services (`http.server`, tunnel, DB) and how to turn each OFF (`CLOUDFLARE_TUNNEL=0`).
 
+### Instalación completa (secuencia numerada, perfil técnico)
+
+Cuando el proyecto se instala desde Git, la instalación se documenta como UN bloque de pasos numerados que ARRANCA en el clone — prohibido separar el clone del setup en otra sección:
+
+1. **Requisitos previos** (paso 1): lo que hay que tener en el sistema ANTES de clonar — runtime y versión, Git, herramientas de SO (ffmpeg, compiladores) con el comando de instalación por OS.
+2. `git clone <url pública>` + `cd <repo>`.
+3. Crear/activar el venv (con el binario `python` real del sistema).
+4. Configurar `.env` (copiar de `.env.example`).
+5. Instalar dependencias.
+6. Ejecutar.
+
+Cada paso con su variante por OS inline en el mismo bloque (Windows/Linux/macOS). El lector debe poder copiar-pastear la secuencia completa sin adivinar pasos intermedios ni omitir el clonado.
+
 ## README Rules
 
 - Explain what the project is and what problem it solves.
 - **Estas reglas técnicas (prerequisites, setup, run, tests) aplican SOLO al perfil técnico.** En perfil descriptivo NO documentes cosas para correr instalar; describe qué es y qué contiene.
 - Document prerequisites, setup, configuration, run, and test commands — all SSOT-verified.
+- En perfil técnico, el bloque de instalación abre con un item "Requisitos previos" (paso 1 de la secuencia): runtime y versión, Git y herramientas de sistema necesarias, con comando de instalación por OS.
+- Cada dependencia principal del Stack lleva su versión/rango EXACTO tomado de `requirements.txt`/`pyproject.toml` (ej. `Flask 3.0.3`, `python-telegram-bot ≥ 21.0,<22.0`) — prohibido un Stack sin versiones.
+- Cuando existan fallos de instalación conocidos y verificables (PEP 668 / externally-managed-environment, binarios que no existen en el host, herramientas ausentes), el README cierra con una tabla Error/Causa/Solución — cada fila extraída de un error real, no inventado.
 - Stand the stack from the repo, never a generic template.
 - Include a concise folder overview when it helps navigation.
 - Describe environment variables in a table or compact list.
@@ -241,6 +258,7 @@ Prefer a Keep a Changelog-style entry when no project convention exists:
 - If the DB shows a user the old README omits → ADD it. If the README lists a user the DB never had → DELETE it from docs (mention in summary; do not delete from the DB).
 - If setup commands are unclear, inspect scripts and entry points before inventing new commands.
 - If secrets, tokens, or private values appear in examples → replace with placeholders.
+- **Si el repo fue movido a otra cuenta/org o es un clon (remote ≠ repo documentado): la URL de `git clone` del README queda obsoleta. Verificar contra `git remote get-url origin`, usar la URL pública (`https://...` si el remote es SSH), corregirla y registrar el arreglo como bullet `Fixed` en el CHANGELOG.**
 
 ## Quality Bar
 
@@ -252,6 +270,7 @@ After the work, the repository must state, from SSOT alone:
 - a fresh env table
 - reproducible setup (one command per step)
 - documentation that matches the real project, not a template
+- the `git clone` URL in the README matches `git remote -v` (SSH remote → public `https://github.com/<owner>/<repo>` in the README)
 
 ## Output Style
 
