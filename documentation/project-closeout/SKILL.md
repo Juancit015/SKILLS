@@ -1,6 +1,6 @@
 ---
 name: project-closeout
-description: Take an EXISTING, WORKING project through its full journey to publishable state in one flow: audit and diagnosis, refactor to a clean layered architecture IF the project is disorganized (monolith, mixed layers, hardcoded secrets, no tests) preserving behavior, then closeout (doc sync, secret scan, Docker hardening, approved commit/push). Phased implementation with EXPLICIT user approval at every step and real validation (smoke tests with root-cause proof). Use when the user asks to "close", "publish", "prepare for release/entrega", "auditar antes de commit", "revisión pre-publicación", "dejar listo el repo", "limpiar/ordenar el código", "refactorizar" or hand off a project. Never commits or pushes automatically.
+description: Take an EXISTING, WORKING project through an evidence-based audit and, when requested/approved, through refactor and closeout to a publishable state. The flow: audit/diagnosis, refactor to a clean layered architecture IF the project is disorganized (monolith, mixed layers, hardcoded secrets, no tests) preserving behavior, then closeout (doc sync, secret scan, Docker hardening, approved commit/push). Phased implementation with EXPLICIT user approval at every step and real validation (smoke tests with root-cause proof). Use when the user asks to "close", "publish", "prepare for release/entrega", "auditar antes de commit", "revisión pre-publicación", "dejar listo el repo", "limpiar/ordenar el código", "refactorizar" or hand off a project. Never commits or pushes automatically.
 ---
 
 # Project Closeout (con Refactor)
@@ -65,7 +65,12 @@ Objetivo: reestructurar por capas preservando el comportamiento. Cada paso = un 
 2. **Servicios / IO externa** (integradores de terceros: APIs, clientes HTTP, binarios del sistema, archivos).
 3. **Presentación / handlers** (enrutado y comandos; entry point queda delgado).
 4. **Hardening de secretos** (secreto hardcodeado → env var obligatoria con fail-fast, `.env.example` con placeholders, loader real verificado con `grep load_dotenv`).
-5. **Red de regresión** (si no existía, este paso pasa a ser el PRIMERO: suite de tests con mocks por dependencia externa y entorno aislado — patrón `tests/mocks/` + fixtures anti-red).
+5. **Red mínima de regresión como baseline** (si no existía, este paso pasa a ser el PRIMERO, antes de cualquier refactor):
+   - crear ÚNICAMENTE las pruebas mínimas necesarias para capturar el comportamiento observable actual (no una suite enorme: las rutas/acciones principales del programa, con mocks por dependencia externa y entorno aislado — patrón `tests/mocks/` + fixtures anti-red);
+   - validar que ese baseline representa correctamente el comportamiento existente (correrlo contra los pasos reales del proyecto y ajustarlo hasta que refleje lo que hace hoy);
+   - usar ese baseline como referencia durante TODO el refactor;
+   - después de cada paquete de refactor, ejecutar las pruebas correspondientes y comparar contra el baseline;
+   - cualquier cambio observable de comportamiento se reporta como HALLAZGO (nunca se asume como mejora).
 6. Al final de la etapa: **docs y tests sync** (puede delegar a `repo-readme-changelog`).
 
 Las capas son RESPONSABILIDADES, no carpetas fijas: la forma varía por stack (Python `handlers/services/utils`; Node `controllers/services/routes`; frontend `components/hooks/api`).

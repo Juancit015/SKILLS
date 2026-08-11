@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## [2026-08-11]
+
+### Agregado
+
+- 13 skills nuevas incorporadas al repositorio, organizadas en categorías por función:
+  - `animation/` (nueva categoría): `animate`, `animation-vocabulary`, `find-animation-opportunities`, `improve-animations`, `review-animations` — de [emilkowalski/skills](https://github.com/emilkowalski/skills).
+  - `design/` (ampliada): `impeccable` (de [pbakaus/impeccable](https://github.com/pbakaus/impeccable), bundle con scripts, requiere Node), `design-taste-frontend` (de [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill)), `apple-design`, `emil-design-eng`, `prototype` — de [emilkowalski/skills](https://github.com/emilkowalski/skills).
+  - `libraries/` (nueva categoría): `ask-sonner`, `pick-ui-library` — de [emilkowalski/skills](https://github.com/emilkowalski/skills).
+  - `writing/` (nueva categoría): `humanizer` (de [blader/humanizer](https://github.com/blader/humanizer)).
+- `README.md` reorganizado con tablas por categoría (design, animación, librerías, escritura, documentación/utiles) y árbol de estructura actualizado con las 19 skills.
+
 ## [2026-08-09]
 
 ### Agregado
